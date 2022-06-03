@@ -4,12 +4,15 @@ const char* password = "";
 #define Relay 14
  
 #include <WiFi.h>
+#include <ArduinoJson.h>
 #include "soc/soc.h"             
 #include "soc/rtc_cntl_reg.h"             
 #include "camera_pins.h"
 #include "camera_server.h"
+#include "tele.h"
 
 void startCameraServer();
+void startTele();
 
 void setup() {
   WRITE_PERI_REG(RTC_CNTL_BROWN_OUT_REG, 0); 
@@ -75,6 +78,7 @@ void setup() {
   }
   Serial.println("");
   Serial.println("WiFi connected");
+  startTele();
   startCameraServer();
 
   Serial.print("Camera Ready! Use 'http://");
